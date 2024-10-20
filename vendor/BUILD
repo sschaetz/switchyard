@@ -45,14 +45,14 @@ cc_library(
     name = "ykush_lib",
     srcs = [
         "ykush/src/commandParser.cpp",
-        "ykush/src/ykushxs/ykushxs.cpp",
-        "ykush/src/ykush/ykush.cpp",
-        "ykush/src/ykush2/ykush2.cpp",
-        "ykush/src/ykush3/ykush3.cpp",
-        "ykush/src/yk_usb_device.cpp",
         "ykush/src/help/ykush_help.cpp",
         "ykush/src/utils/command_parser.cpp",
         "ykush/src/utils/string2val.cpp",
+        "ykush/src/yk_usb_device.cpp",
+        "ykush/src/ykush/ykush.cpp",
+        "ykush/src/ykush2/ykush2.cpp",
+        "ykush/src/ykush3/ykush3.cpp",
+        "ykush/src/ykushxs/ykushxs.cpp",
         
     ] + select({
         "@platforms//os:linux": [
@@ -61,19 +61,18 @@ cc_library(
         "//conditions:default": [],
     }),
     hdrs = [
-        "ykush/src/stdafx.h",
-        "ykush/src/yk_usb_device.h",
-        "ykush/src/platformdefs.h",
-        "ykush/src/ykushxs/ykushxs.h",
         "ykush/src/commandParser.h",
-        "ykush/src/utils/command_parser.h",
         "ykush/src/help/ykush_help.h",
+        "ykush/src/platformdefs.h",
+        "ykush/src/stdafx.h",
+        "ykush/src/usbhid/usbhid.h",
+        "ykush/src/utils/command_parser.h",
         "ykush/src/utils/string2val.h",
+        "ykush/src/yk_usb_device.h",
+        "ykush/src/ykush/ykush.h",
         "ykush/src/ykush2/ykush2.h",
         "ykush/src/ykush3/ykush3.h",
-        "ykush/src/ykush/ykush.h",
-        "ykush/src/usbhid/usbhid.h",
-        
+        "ykush/src/ykushxs/ykushxs.h",
     ],
     includes = [
         "ykush/src",

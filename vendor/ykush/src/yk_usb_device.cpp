@@ -79,6 +79,7 @@ int UsbDevice::listConnected()
 UsbDevice::UsbDevice(unsigned int vendor_id, unsigned int product_id) {
 	pid = product_id;
 	vid = vendor_id;
+	usb_serial = NULL;
 }
 
 
