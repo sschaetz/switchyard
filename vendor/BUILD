@@ -1,3 +1,5 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
 cc_library(
     name = "hidapi",
     srcs = select({
@@ -18,6 +20,7 @@ cc_library(
         "//conditions:default": [],
     }),
     strip_include_prefix = "hidapi/",
+    deps = ["@libusb//:libusb"],
 )
 
 cc_binary(
@@ -35,4 +38,78 @@ cc_binary(
         "@platforms//os:macos": ["-framework IOKit"],
         "//conditions:default": [],
     }),
+)
+
+
+cc_library(
+    name = "ykush_lib",
+    srcs = [
+        "ykush/src/commandParser.cpp",
+        "ykush/src/ykushxs/ykushxs.cpp",
+        "ykush/src/ykush/ykush.cpp",
+        "ykush/src/ykush2/ykush2.cpp",
+        "ykush/src/ykush3/ykush3.cpp",
+        "ykush/src/yk_usb_device.cpp",
+        "ykush/src/help/ykush_help.cpp",
+        "ykush/src/utils/command_parser.cpp",
+        "ykush/src/utils/string2val.cpp",
+        
+    ] + select({
+        "@platforms//os:linux": [
+            "ykush/src/usbhid/usbhid.cpp",
+        ],
+        "//conditions:default": [],
+    }),
+    hdrs = [
+        "ykush/src/stdafx.h",
+        "ykush/src/yk_usb_device.h",
+        "ykush/src/platformdefs.h",
+        "ykush/src/ykushxs/ykushxs.h",
+        "ykush/src/commandParser.h",
+        "ykush/src/utils/command_parser.h",
+        "ykush/src/help/ykush_help.h",
+        "ykush/src/utils/string2val.h",
+        "ykush/src/ykush2/ykush2.h",
+        "ykush/src/ykush3/ykush3.h",
+        "ykush/src/ykush/ykush.h",
+        "ykush/src/usbhid/usbhid.h",
+        
+    ],
+    includes = [
+        "ykush/src",
+        "ykush/src/ykush",
+        "ykush/src/ykush2",
+        "ykush/src/ykushxs",
+        "ykush/src/ykush3",
+        "ykush/src/utils",
+        "ykush/src/help",
+        "ykush/src/usbhid",
+    ],
+    linkopts = select({
+        "@platforms//os:macos": ["-framework IOKit"],
+        "//conditions:default": [],
+    }),
+    deps = select({
+        "@platforms//os:linux": [
+            "@libusb//:libusb",
+            
+        ],
+        "@platforms//os:macos": [":hidapi"],
+        "//conditions:default": [],
+    }),
+    defines = select({
+        "@platforms//os:linux": [
+            "_LINUX_",
+            "_LIBUSB_",
+            
+        ],
+        "//conditions:default": [],
+    }),
+)
+
+
+cc_binary(
+    name = "ykush",
+    srcs = ["ykush/src/yktrl.cpp"],
+    deps = [":ykush_lib"],
 )
