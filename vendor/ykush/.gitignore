@@ -1,0 +1,14 @@
+*.swp
+*.bak
+*.o
+.directory
+bin/ykushcmd*
+.vs/
+*.exe
+*.so
+*.exp
+nbproject
+doc/ykushcmd-doxygen/*
+.vscode
+dev/
+

@@ -1,0 +1,145 @@
+<h1>YKUSHXS Board Commands</h1>
+
+<div class="reference_page_toc">
+        <ul>
+                <li><a href="#command_overview">Command overview</a></li>
+                <li><a href="#list_attached_example">List attached boards</a></li>
+                <li><a href="#switch_command_example">Downstream port On/Off switching</a></li>
+                <li><a href="#switch_state_command_example">Port switching state</a></li>      
+        </ul>
+</div>
+
+
+
+
+<h2 id="command_overview">Command overview</h2>
+<p>YKUSHXS board commands have the following structure.</p>
+<p class="command_line">ykushcmd ykushxs [-s serial_number] [OPTION]</p>
+<p>Where:</p>
+<table cellpadding="10">
+        <tr>
+                <td width="30%" valign="top">-s serial_number</td>
+                <td>
+                        Board serial number to which the command is addressed.
+                        When multiple YKUSH boards are connected to a host, this option should be used
+                        to specify the board. If more than one board is connected and this option is not
+                        provided the command will be sent to the first board in the USB enumeration list.
+                </td>
+        </tr>
+
+        <tr>
+                <td valign="top">-l</td>
+                <td>
+                        List attached YKUSHXS boards.
+                        The serial number of each board attached to the host will be displayed.
+                </td>
+        </tr>
+        <tr>
+                <td>-d</td>
+                <td>
+                        Power Down/Off the downstream port.
+                </td>
+        </tr>
+        <tr>
+                <td>-u</td>
+                <td>
+                        Power Up/On the downstream port.
+                </td>
+        </tr>
+        <tr>
+                <td>-g</td>
+                <td>
+                        Get downstream port state.
+                </td>
+        </tr>
+</table>
+
+
+
+<h2 id="list_attached_example">List attached boards</h2>
+<p>
+        The <b>[-l]</b> option is used to list all attached YKUSHXS boards.
+        All YKUSH board have unique serial numbers which are displayed when this option is used.
+</p>
+<pre>
+<code class="language-bash">
+#list the serial number for each of the attached YKUSHXS boards
+$ ykushcmd ykushxs -l
+
+Attached YKUSHXS Boards:
+1. Board found with serial number: YK17125
+2. Board found with serial number: YK21493
+</code>
+</pre>
+                
+
+
+<h2 id="switch_command_example">Downstream port On/Off switching</h2>
+<p>
+        When only one YKUSHXS board is attached to the host the <b>[-s serial_number]</b> option is not required.
+        Bellow are some examples.
+</p>
+<pre>
+<code class="language-bash">
+#power-down the downstream port
+$ ykushcmd ykushxs -d
+
+#power-up the downstream port 
+$ ykushcmd ykushxs -u
+</code>
+</pre>
+
+<p>
+        If more than one YKUSHXS board is attached to the host the <b>[-s serial_number]</b> option should be used.
+        Bellow are some examples.
+</p>
+<pre>
+<code class="language-bash">
+#list the serial number for each of the attached YKUSHXS boards
+$ ykushcmd ykushxs -l
+
+Attached YKUSHXS Boards:
+1. Board found with serial number: YK17125
+2. Board found with serial number: YK21493
+
+#power-down the downstream port of the board with serial number YK17125
+$ ykushcmd ykushxs -s YK17125 -d
+</code>
+</pre>
+
+
+<h2 id="switch_state_command_example">Port switching state</h2>
+<p>
+        The current switching state of each downstream port can be fetched from the YKUSH board using the <b>[-g 1|2|3]</b> option.
+</p>
+<pre>
+<code class="language-bash">
+#State of the downstream port
+$ ykushcmd ykushxs -g
+
+Downstream port is ON
+
+#power-down the downstream port
+$ ykushcmd ykushxs -d
+
+#State of downstream port
+$ ykushcmd ykushxs -g
+
+Downstream port is OFF
+
+#list the serial number for each of the attached YKUSHXS boards
+$ ykushcmd ykushxs -l
+
+Attached YKUSHXS Boards:
+1. Board found with serial number: YK17125
+2. Board found with serial number: YK21493
+
+#State of the downstream port for the board with serial number YK17125
+$ ykushcmd ykushxs -s YK17125 -g
+
+Downstream port is OFF
+
+#power-up the downstream port of the board with serial number YK17125
+$ ykushcmd ykushxs -s YK17125 -u
+</code>
+</pre>
