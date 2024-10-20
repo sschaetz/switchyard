@@ -66,7 +66,6 @@ int char2int(char input)
 int hex2bin(char* src, unsigned char* output, int size)
 {
 	//unsigned char *out = (unsigned char*)malloc(size/2);
-	unsigned char out;
 	int i;
 
 	for(i=0; i<size; i=i+2) {
@@ -83,7 +82,6 @@ int hex2bin(char* src, unsigned char* output, int size)
 int dec2bin(char* src, unsigned char* output, int size)
 {
 	//unsigned char *out = (unsigned char*)malloc(size/2);
-	unsigned char out;
 	int base;
 	for(int i = 0; i < size; i++) {
 		base = 1;

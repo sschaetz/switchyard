@@ -18,7 +18,11 @@ cc_library(
         "//conditions:default": [],
     }),
     strip_include_prefix = "hidapi/",
-    deps = ["@libusb//:libusb"],
+    deps = select({
+        "@platforms//os:linux": ["@libusb//:libusb"],
+        "@platforms//os:macos": [],
+        "//conditions:default": [],
+    }),
 )
 
 cc_binary(

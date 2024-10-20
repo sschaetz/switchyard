@@ -107,7 +107,7 @@ int ykushxs_cmd_parser(int argc, char** argv)
 		break;
 
 	}
-
+	return 0;
 }
 
 
@@ -145,8 +145,6 @@ int YkushXs::port_down(char *serial)
 
 int YkushXs::get_port_status(char *serial)
 {
-	int status;
-
 	hid_report_out[0] = 0x21;   //get status
 
 	int res = sendHidReport(serial, hid_report_out, hid_report_in, 64);

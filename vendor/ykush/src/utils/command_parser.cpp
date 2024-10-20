@@ -137,7 +137,6 @@ int CommandLine::parse(int argc, char **argv)
  */
 int CommandLine::is_board(std::string board_name) 
 {
-	int i = 0;
 	struct command_option *cur_opt;
 	cur_opt = command.options;
 	while (cur_opt) {

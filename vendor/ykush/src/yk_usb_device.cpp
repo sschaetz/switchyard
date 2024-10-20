@@ -155,9 +155,6 @@ int UsbDevice::sendHidReport(char *serial, unsigned char *msg, unsigned char *re
 	
 	if (serial) {
 			// Convert to a wchar_t*
-			size_t origsize = strlen(serial) + 1;
-			size_t convertedChars = 0;
-
 			swprintf(cserial, newsize, L"%s", serial);
 
 		}

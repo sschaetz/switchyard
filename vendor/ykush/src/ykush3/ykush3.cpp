@@ -19,9 +19,6 @@ int ykush3_action_parser(struct command_line *cmdl)
 {
 	Ykush3 ykush3;
 	struct command_option *cur_opt;
-	struct command_parameter *cur_param;
-	char *serial;
-	bool routed = false;
 
 	std::string opt_name;
 	std::string param_name;
@@ -450,7 +447,6 @@ int Ykush3::i2c_read(char *i2c_address_ASCII,
 
 	sendHidReport(usb_serial, hid_report_out, hid_report_in, 64);
         // DEBUG PRINT
-        int j;
         //for (j = 0; j < 64; j++)
           //              std::cout << std::hex << (int)hid_report_in[j] << " ";
 	//handle response message
@@ -474,7 +470,6 @@ int Ykush3::i2c_read(char *i2c_address_ASCII,
 int 
 Ykush3::display_version_bootloader (void)
   {
-    int major, minor, patch;
     hid_report_out[0] = 0x61;
     hid_report_out[1] = 0x01;
     if (sendHidReport(usb_serial, hid_report_out, hid_report_in, 64) != 0)
@@ -553,7 +548,7 @@ int Ykush3::i2c_write_buffer(struct command_option *cur_opt)
 	if (cur_opt) {
 		command_parameter *param = cur_opt->parameters->next;
 		char *buffer[60];
-		char num_bytes = 0;
+		int num_bytes = 0;
 		while (param) {
                         buffer[num_bytes] = param->value;
 			num_bytes++;
