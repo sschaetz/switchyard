@@ -3,7 +3,6 @@ module(
     version = "0.1",
 )
 
-bazel_dep(name = "rules_cc", version = "0.0.13")
 bazel_dep(name = "rules_libusb", version="0.1.0-rc1")
 
 libusb = use_extension("@rules_libusb//:extensions.bzl", "libusb")
