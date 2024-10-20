@@ -18,3 +18,21 @@ git_override(
     commit = "6fc2c0ca35ad3c73fd003d80b0d3ac03380fbf6d",
 )
 ```
+
+## Usage
+
+When checkout out this repository use the tools like this:
+
+```bash
+bazel run //vendor:ykush -- -h
+bazel run //vendor:uhidctl -- -h
+```
+
+Through bzlmod use the tools like this:
+
+```bash
+bazel run @switchyard//vendor:ykush -- -h
+bazel run @switchyard//vendor:uhidctl -- -h
+```
+
+And of course they can be added as tools to other targets.
