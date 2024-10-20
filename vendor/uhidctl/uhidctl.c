@@ -185,7 +185,7 @@ static int find_relays()
     int nports;
     int rc;
     int perm_ok = 1;
-
+    (void)perm_ok;
     relay_count = 0;
     devs = hid_enumerate(0, 0);
 
