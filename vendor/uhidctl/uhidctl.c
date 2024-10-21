@@ -59,8 +59,8 @@ static int relay_count = 0;
 
 
 /* default options */
-static char opt_relay[16] = "";          /* Serial number of relay to operate on */
-static char opt_newserial[16] = "";      /* New serial number to assign, only used for -s */
+static char opt_relay[16+1] = "";          /* Serial number of relay to operate on */
+static char opt_newserial[16+1] = "";      /* New serial number to assign, only used for -s */
 static int opt_ports  = ALL_RELAY_PORTS; /* Bitmask of relay ports to operate on */
 static int opt_action = POWER_KEEP;      /* Power action */
 static double opt_delay = 2;             /* Delay for power cycle */
@@ -376,10 +376,10 @@ int main(int argc, char *argv[])
             printf("\n");
             break;
         case 'l':
-            strncpy(opt_relay, optarg, sizeof(opt_relay));
+            strncpy(opt_relay, optarg, sizeof(opt_relay-1));
             break;
         case 's':
-            strncpy(opt_newserial, optarg, sizeof(opt_newserial));
+            strncpy(opt_newserial, optarg, sizeof(opt_newserial-1));
             break;
         case 'p':
             if (!strcasecmp(optarg, "all")) { /* all ports is the default */
