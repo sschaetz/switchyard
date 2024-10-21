@@ -23,6 +23,7 @@ cc_library(
         "@platforms//os:macos": [],
         "//conditions:default": [],
     }),
+    copts = ["-Wno-unused-but-set-variable"],
 )
 
 cc_binary(
